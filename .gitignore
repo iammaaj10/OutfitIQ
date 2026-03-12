@@ -1,0 +1,17 @@
+# ===== PYTHON / FASTAPI =====
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.pyc
+backend/.env
+
+# ===== NODE / REACT =====
+frontend/node_modules/
+frontend/.env
+frontend/build/
+frontend/.DS_Store
+
+# ===== GENERAL =====
+.DS_Store
+*.log
+.env
