@@ -1,14 +1,34 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { AuthProvider, useAuth } from './context/AuthContext'
+import Navbar from './components/Navbar'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Dashboard from './pages/Dashboard'
 
-import './App.css'
 
-function App() {
- 
+const ProtectedRoute = ({ children }) => {
+    const { user } = useAuth()
+    return user ? children : <Navigate to="/login" />
+}
 
-  return (
-    <>
-      <h1 className='text-center font-bold text-2xl text-blue-400'>Allah is great</h1>
-    </>
-  )
+const App = () => {
+    return (
+        <AuthProvider>
+            <BrowserRouter>
+                <Navbar />
+                <Routes>
+                    <Route path="/" element={<Navigate to="/dashboard" />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/dashboard" element={
+                        <ProtectedRoute>
+                            <Dashboard />
+                        </ProtectedRoute>
+                    } />
+                </Routes>
+            </BrowserRouter>
+        </AuthProvider>
+    )
 }
 
 export default App
